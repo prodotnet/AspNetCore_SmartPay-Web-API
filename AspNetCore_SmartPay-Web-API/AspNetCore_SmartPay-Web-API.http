@@ -1,0 +1,6 @@
+@AspNetCore_SmartPay_Web_API_HostAddress = http://localhost:5236
+
+GET {{AspNetCore_SmartPay_Web_API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
