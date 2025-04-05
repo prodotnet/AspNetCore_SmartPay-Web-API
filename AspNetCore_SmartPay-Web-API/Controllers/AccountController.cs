@@ -52,7 +52,7 @@ namespace AspNetCore_SmartPay_Web_API.Controllers
 
             if (user.EmailConfirmed == false) return Unauthorized("Please confirm your email");
 
-            //later i will change this to true so that if the user enter an incorrect passord i lock it 
+            //later i will change this to true so that if the user enter an incorrect password for x3 I  lock it for security purpose 
             var  results = await _SignInManager.CheckPasswordSignInAsync(user, model.Password ,false);
 
             if (!results.Succeeded)
@@ -72,6 +72,8 @@ namespace AspNetCore_SmartPay_Web_API.Controllers
             {
                 return BadRequest($"The email address {model.Email} is already in use. Please try another email address.");
             }
+
+
             var newUser = new User
             {
 
