@@ -110,7 +110,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthentication(); //***  adding use Authentication into our pipeline , will be used to varify the identity of a use 
 app.UseAuthorization();//determines user access rights

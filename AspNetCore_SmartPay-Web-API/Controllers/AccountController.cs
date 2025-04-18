@@ -43,7 +43,7 @@ namespace AspNetCore_SmartPay_Web_API.Controllers
 
     
         [HttpPost("Login")]
-        public async Task<ActionResult<UserDto>>Login(LoginDto model)
+        public async Task<ActionResult<UserDto>>Login( [FromBody] LoginDto model)
         {
             var user = await _userManager.FindByNameAsync(model.UserName);
             
