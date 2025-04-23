@@ -10,6 +10,7 @@ using System.ComponentModel.DataAnnotations;
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace AspNetCore_SmartPay_Web_API.Controllers
 {
@@ -45,7 +46,7 @@ namespace AspNetCore_SmartPay_Web_API.Controllers
         [HttpPost("Login")]
         public async Task<ActionResult<UserDto>>Login( [FromBody] LoginDto model)
         {
-            var user = await _userManager.FindByNameAsync(model.UserName);
+            var user = await _userManager.FindByNameAsync(model.Email);
             
             
             if (user == null) return Unauthorized("Invaild username or password");
@@ -70,7 +71,7 @@ namespace AspNetCore_SmartPay_Web_API.Controllers
         {
             if(await CheckEmailExist(model.Email))
             {
-                return BadRequest($"The email address {model.Email} is already in use. Please try another email address.");
+                return BadRequest(new { message = $"The email address {model.Email} is already in use. Please try another email address." });
             }
 
 
@@ -90,10 +91,14 @@ namespace AspNetCore_SmartPay_Web_API.Controllers
 
             var result = await _userManager.CreateAsync(newUser,model.Password);
 
-            if(!result.Succeeded) BadRequest(result.Errors);
+            if (!result.Succeeded)
+            {
+                // Return errors in a JSON format
+                return BadRequest(new { message = "Account creation failed", errors = result.Errors.Select(e => e.Description) });
+            }
 
-
-            return Ok("You Successfully created an account");
+            // Return a success response with a proper JSON format
+            return Ok(new { message = "You successfully created an account." });
         }
 
 

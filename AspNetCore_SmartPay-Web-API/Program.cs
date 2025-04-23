@@ -4,11 +4,14 @@ using AspNetCore_SmartPay_Web_API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using System.Linq;
 using System.Text;
 
 
@@ -94,14 +97,41 @@ builder.Services.AddCors(options =>
     {
         policy.AllowAnyHeader()
               .AllowAnyMethod()
-              .AllowAnyOrigin();
+              .AllowAnyOrigin()
+              .WithOrigins(builder.Configuration["JWT:ClientUrl"]); // Angular app URL
 
     });
 });
 
-//app.UseCors("AllowAll");
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+
+    options.InvalidModelStateResponseFactory = actionContext =>
+    {
+        var errors = actionContext.ModelState
+            .Where(x => x.Value?.Errors.Count > 0)
+            .SelectMany(x => x.Value?.Errors ?? Enumerable.Empty<ModelError>())
+            .Select(x => x.ErrorMessage)
+            .ToArray();
+
+        var toReturn = new
+        {
+            Errors = errors
+        };
+
+        return new BadRequestObjectResult(toReturn);
+    };
+
+});
+
+
 
 var app = builder.Build();
+
+
+//(Cross-Origin Resource Sharing)
+
+app.UseCors("AllowAll");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -113,7 +143,7 @@ if (app.Environment.IsDevelopment())
 //app.UseHttpsRedirection();
 
 app.UseAuthentication(); //***  adding use Authentication into our pipeline , will be used to varify the identity of a use 
-app.UseAuthorization();//determines user access rights
+app.UseAuthorization(); //determines user access rights
 
 app.MapControllers();
 
