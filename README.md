@@ -1,32 +1,54 @@
-🚀 SmartPay Series – Episode 2: Securing the Backend with ASP.NET Core Web API 🔐
-In this episode of SmartPay, I’m diving into the backend development of my digital wallet system, ensuring secure user authentication using ASP.NET Core Identity and JWT tokens.
+# 💳 SmartPay: ASP.NET Core Web API
 
-🔹 Tech Stack for the Backend: ✔ ASP.NET Core Web API – Backend services & authentication
-✔ IdentityDbContext – Managing user authentication
-✔ JWT & JWTBearer Authentication – Secure token-based authentication
-✔ UserManager & SignInManager – Handling user registration and login
+> A secure backend API for the **SmartPay** mobile wallet, built using **ASP.NET Core 9.0**. This API provides the necessary services for handling user authentication, transaction management, Safe Mode activation, and more.
 
-✅ Features Implemented So Far:
-🔐 User Registration & Login – Secure sign-up & sign-in with email verification
-🔑 JWT Authentication – Generating access tokens for users
-🔄 Token Refresh Endpoint – Allows users to refresh their authentication token
-📩 Email Existence Check – Prevents duplicate registrations
+---
 
-🛠 Key Components:
-✔ JwtService – Handles JWT creation for authentication
-✔ UserDto, LoginDto, RegisterDto – Data transfer objects for clean API communication
-✔ AccountController – Manages user authentication
+## 📌 Project Overview
+
+The **SmartPay Web API** serves as the backend for the **SmartPay Mobile App** and **Web App**. It handles user authentication, wallet management, transactions, voice recognition triggers for Safe Mode, and silent alerts. The API is designed with security in mind, utilizing industry-standard practices for handling sensitive data.
+
+---
+
+## 🚨 Key Features
+
+- 🔐 **User Authentication**: Secure JWT authentication for users.
+- 💰 **Wallet Management**: Users can view their wallet balance, transaction history, and perform transfers.
+- 🛑 **Safe Mode Activation**: Trigger Safe Mode via voice recognition or panic phrase.
+- 📩 **Silent Alerts**: Sends silent alerts to predefined contacts when Safe Mode is triggered.
+- 🔐 **Secure PIN System**: Dual PIN authentication — one for login, one for Safe Mode exit.
+- 📝 **Transaction History**: View past transactions, with support for filtering and sorting.
+- 🛠 **Admin Panel**: Admin can monitor users and transactions in real-time.
+
+---
+
+## 🧠 Tech Stack
+
+- **Backend**: ASP.NET Core 9.0 (C#)
+- **Authentication**: JWT Tokens, Secure PIN System
+- **Database**: SQL Server / Azure SQL
+- **Voice Recognition**: Integration with the mobile app using Vosk API (for Safe Mode trigger)
 
 
+---
+### API Test: **Postman**
+
+For testing all the API endpoints, **Postman** was used to ensure proper functionality and smooth interactions with the SmartPay API. Postman was chosen as the tool for the following reasons:
+
+- **Easy to Use**: With a simple user interface for sending requests, viewing responses, and managing collections of API calls.
+- **Environment Management**: Supports managing variables (like JWT tokens) in environments, making repeated testing seamless.
+- **Collection Sharing**: Allows exporting the API collection for sharing or reusing requests.
+
+The **SmartPay API Postman Collection** has been pre-configured with all the essential endpoints for testing the API. You can import this collection into your Postman and start testing right away.
+
+---
 
 
+## 🚀 Project Status
 
-🛠 Testing with Postman
-I’ve been using Postman to test the API endpoints for registration and login to ensure that everything works as expected. It allows me to verify the correct handling of requests and responses, ensuring the JWT token is properly generated and authenticated.
-
-🔥 Next Steps (Episode 3 Teaser):
-I’ll now focus on wallet transactions & payment processing, ensuring secure money transfers within SmartPay. Stay tuned! 🚀
-
-💬 Have you implemented JWT authentication in your projects? Share your experience in the comments!
-
-#DotNetMAUI #SmartPay #ASPNetCore #JWT #WebAPI #Authentication #Postman #MicrosoftLearn #SoftwareDevelopment #FinTech
+- ✅ **Authentication endpoints** (login, JWT token management) complete
+- ✅ **Wallet endpoints** (balance, transaction) working
+- 🔜 **Voice recognition integration** for Safe Mode (via mobile app)
+- 🔜 **Database schema** updates (transactions, Safe Mode flags)
+- 🔜 **Admin panel** for monitoring and reporting
+- 🔜 **Demo video** & **live deployment** coming soon
