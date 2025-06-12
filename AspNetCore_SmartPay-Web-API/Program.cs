@@ -43,10 +43,10 @@ builder.Services.AddScoped<JwtServices>();
 builder.Services.AddIdentityCore<User>(option =>
 {
     option.Password.RequiredLength = 6;
-    option.Password.RequireDigit = false;
+    option.Password.RequireDigit = true;
     option.Password.RequireLowercase = true;
     option.Password.RequireUppercase = true;
-    option.Password.RequireNonAlphanumeric = false;
+    option.Password.RequireNonAlphanumeric = true;
 
 
 

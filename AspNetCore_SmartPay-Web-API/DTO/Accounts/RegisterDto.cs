@@ -18,7 +18,7 @@ namespace AspNetCore_SmartPay_Web_API.DTO.Accounts
         [RegularExpression("^[\\w\\.=-]+@[\\w\\.-]+\\.[\\w]{2,3}$", ErrorMessage = "Invaild email address")]
         public string Email { get; set; }
         [Required]
-        [StringLength(15, MinimumLength = 6, ErrorMessage = "First name must be at least {2}, and maximu {1} characters")]
+        [StringLength(15, MinimumLength = 6, ErrorMessage = "Password  must be at least {2}, and maximu {1} characters")]
         public string Password { get; set; }
     }
 }
